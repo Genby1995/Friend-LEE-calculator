@@ -1,0 +1,19 @@
+@import "fonts.css";
+
+body{
+    font-family: "Nekst", sans-serif;
+}
+
+.main{
+    background-color: red;
+}
+.container{
+    padding: 10px
+}
+.img{
+    background-image: url("../../public/favicon.png");
+    height: 300px;
+    width: 300px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}

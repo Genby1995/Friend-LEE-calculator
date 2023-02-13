@@ -1,63 +1,117 @@
-import webpack from "webpack"
-import path from 'path'
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserWebpackPlugin = require("terser-webpack-plugin");
+const path = require("path");
 
-const production = process.env.NODE_ENV === "production";
+const isProduction = process.env.NODE_ENV === "production";
+const isDevelopment = process.env.NODE_ENV === "development";
+
+const babelLoader = (preset) => {
+    const loader = {
+        loader: "babel-loader",
+        options: {
+            presets: ['@babel/preset-env'],
+        }
+    }
+    if (preset) {
+        loader.options.presets.push(preset)
+    }
+
+    return loader
+}
+
+const filename = (ext) => isProduction ? `[name].[contenthash].${ext}` : `[name].${ext}`
+
+const optimization = () => {
+    const config = {
+        splitChunks: {
+            chunks: "all"
+        }
+    }
+    if (isProduction) {
+        config.minimizer = [
+            new CssMinimizerPlugin(),
+            new TerserWebpackPlugin(),
+        ]
+    }
+    return config
+}
 
 module.exports = {
-    entry: { myAppName: path.resolve(__dirname, "./src/index.js")},
-    output: {
-        path: path.resolve(__dirname, "./disk"),
-        filename: production ? '[name].[contenthash].js' : '[name].js'
+    mode: isProduction ? "production" : "development",
+    entry: {
+        main: path.resolve(__dirname, "./src/index.jsx")
     },
+    output: {
+        path: path.resolve(__dirname, "./dist"),
+        filename: filename("js"),
+        assetModuleFilename: isProduction ? 'assets/[hash][ext][query]' : 'assets/[name][ext][query]',
+    },
+    resolve: {
+        extensions: ["*", ".js", ".jsx", ".scss", ".png"],
+        alias: {
+            "@": path.resolve(__dirname, "src")
+        }
+    },
+    optimization: optimization(),
+    devServer: {
+        port: 3000,
+        hot: isDevelopment,
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            // tittle: "Friend Lee",
+            template: "./src/index.html",
+            // favicon: './public/favicon.png',
+            minify: {
+                collapseWhitespace: isProduction
+            },
+        }),
+        new MiniCssExtractPlugin({
+            filename: filename("css"),
+        }),
+    ],
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.js$/,
                 exclude: /node_modules/,
-                use: ["babel-loader"],
+                use: babelLoader()
+            },
+            {
+                test: /\.jsx$/,
+                exclude: /node_modules/,
+                use: babelLoader("@babel/preset-react")
+            },
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader']
             },
             {
                 test: /\.(s(a|c)ss)$/,
                 exclude: /node_modules/,
                 use: [
-                    production ? MiniCssExtractPlugin.loader : 'style-loader',
-                    {
-                        loader: "css-loader",
-                        options: {
-                            modules: true,
-                            sourceMap: !production
-                        }
-                    },
-                    {
-                        loader: "sass-loader",
-                        options: {
-                            sourceMap: !production
-                        }
-                    },
-                ],
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    "sass-loader"]
+            },
+            {
+                test: /\.(png|gif|svg|jpg)$/,
+                exclude: /node_modules/,
+                type: 'asset/resource'
+            },
+            {
+                test: /\.(ttf|woff|woff2|eot)$/,
+                exclude: /node_modules/,
+                type: 'asset/resource'
             }
         ]
-    },
-    resolve: {
-        extensions: ["*", ".js", ".jsx", ".scss"],
-    },
-    pluggins: [
-        new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            tittle: "Friend Lee",
-            template: "./src/index.html",
-            favicon: '.public/favicon.ico'
-        }),
-        new MiniCssExtractPlugin({
-            filename: production ? "[name].[contenthash].css" : '[name].css'
-        }),
-    ],
-    devSever: {
-        port: 3001,
-        hot: true,
-    },
-    mode: production ? "production" : "development"
+    }
+
 }
