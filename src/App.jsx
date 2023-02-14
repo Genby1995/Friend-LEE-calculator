@@ -11,6 +11,22 @@ function App() {
   const mounthPay = (+autoPrice - +initialPayment) * 0.05 * (1 + 0.05) ** (+leaseTerm) / ((1 + 0.05) ** (+leaseTerm) - 1);
   const signSum = +initialPayment + (+leaseTerm * +mounthPay);
 
+  const handleClick = () => {
+    console.log(1);
+    setStatus("loading");
+    setTimeout(() => {
+      setStatus("waiting");
+      let data = {
+        autoPrice:autoPrice,
+        initialPayment:initialPayment,
+        leaseTerm: leaseTerm,
+      }
+      let json = JSON.stringify(data);
+      alert(json)
+      setStatus("ready");
+    }, 2000);
+  }
+
   if (+initialPayment > +autoPrice * 0.6) {
     setInitialPayment(+autoPrice * 0.6)
   }
@@ -74,7 +90,7 @@ function App() {
           </div>
           <div className="calc-wrapper">
 
-            <Button status="disabled" text="Оставить заявку" />
+            <Button status={status} text="Оставить заявку" clickHandler={handleClick} />
           </div>
         </div>
 

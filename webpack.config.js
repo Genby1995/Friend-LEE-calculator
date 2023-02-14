@@ -50,7 +50,7 @@ module.exports = {
         assetModuleFilename: isProduction ? 'assets/[hash][ext][query]' : 'assets/[name][ext][query]',
     },
     resolve: {
-        extensions: ["*", ".js", ".jsx", ".scss", ".png"],
+        extensions: ["*", ".js", ".jsx", ".scss", ".png", ".ico"],
         alias: {
             "@": path.resolve(__dirname, "src")
         }
@@ -63,9 +63,9 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            // tittle: "Friend Lee",
+            tittle: "Friend Lee",
             template: "./src/index.html",
-            // favicon: './public/favicon.png',
+            favicon: './public/favicon.ico',
             minify: {
                 collapseWhitespace: isProduction
             },

@@ -1,13 +1,13 @@
+@import "fonts.css";
+
 $color-char: #FF9514;
 $color-char-text: #ffffff;
 $color-hover: rgba(17, 17, 17, 1);
 $color-active: rgba(87, 87, 87, 1);
 $color-disabled: rgba(255, 149, 20, 0.4);
-
 $color-slider-range: #E1E1E1;
 $color-slider-bg: #F3F3F4;
 $color-slider-bg2: #EBEBEC;
-
 $color-input: #575757;
 
 :root {
@@ -111,7 +111,7 @@ $color-input: #575757;
         color: $color-input;
         font-size: var(--fs-input);
         min-width: 50px;
-        background-color: $color-slider-bg;
+        background-color: inherit;
         outline: none;
         border: none;
         font-family: 'Nekst';
@@ -191,6 +191,8 @@ $color-input: #575757;
     border: none;
     font-family: 'Nekst';
     font-size: var(--fs-input);
+    display: flex;
+    justify-content: center;
     cursor: pointer;
 
     &:hover {
@@ -210,8 +212,8 @@ $color-input: #575757;
         background-image: url("../../public/spinner.svg");
         background-repeat: no-repeat;
         background-size: contain;
-        height: 1rem;
-        width: 1rem;
+        height: var(--fs-input);
+        width: var(--fs-input);
     }
 }
 
