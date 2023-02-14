@@ -1,25 +1,41 @@
+$color-char: #FF9514;
+$color-char-text: #ffffff;
+$color-hover: rgba(17, 17, 17, 1);
+$color-active: rgba(87, 87, 87, 1);
+$color-disabled: rgba(255, 149, 20, 0.4);
+
+$color-slider-range: #E1E1E1;
+$color-slider-bg: #F3F3F4;
+$color-slider-bg2:  #EBEBEC;
+
+$color-input: #575757;
+
+$fs-input: 30px;
+$fs-display: 20px;
+$br-radius: 16px;
+
 .button {
     font-size: 1rem;
     font-weight: 900;
     padding: 0.5rem;
     border-radius: 3rem;
     text-align: center;
-    color: white;
-    background-color: #FF9514;
+    color: $color-char-text;
+    background-color: $color-char;
     border: none;
     font-family: 'Nekst';
     cursor: pointer;
 
     &:hover {
-        background-color: rgba(17, 17, 17, 1);
+        background-color: $color-hover;
     }
 
     &:active {
-        background-color: rgba(87, 87, 87, 1);
+        background-color: $color-active;
     }
 
     &:disabled {
-        background-color: rgba(255, 149, 20, 0.4);
+        background-color: $color-disabled;
     }
 
     &>.spinner {
@@ -34,16 +50,62 @@
 
 .slider {
     position: relative;
-    background-color: #F3F3F4;
-    border-radius: 1rem;
-    padding: 1rem;
+    background-color: $color-slider-bg;
+    border-radius: $br-radius;
+    padding: 5px;
+    padding-left: $br-radius;
+    min-height: 2*$fs-input;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid $color-slider-bg;
 
-    .slider__progress-line {
-        background-color: #FF9514;
+    &:focus-within{
+        background-color: white;
+    }
+    &.disabled{
+        opacity: 50%;
     }
 
-    .slider__progress-line,
-    .slider__range {
+    .slider__input{
+        flex: 1;
+        color: $color-input;
+        font-size: $fs-input;
+        min-width: 50px;
+        background-color: $color-slider-bg;
+        outline: none;
+        border: none;
+        font-family: 'Nekst';
+        &:focus{
+            background-color: white;
+        }
+    }
+
+    &__display{
+        flex: 0;
+        color: $color-input;
+        font-size: $fs-display;
+        padding: $fs-display*0.75;
+        border-radius: $br-radius;
+        background-color: $color-slider-bg2;
+        outline: none;
+        border: none;
+        font-family: 'Nekst';
+    }
+
+    &__unit{
+        color: $color-input;
+        font-size: $fs-input;
+        font-family: 'Nekst';
+        padding-right: $br-radius;
+    }
+
+    &__progress-line {
+        background-color: none;
+    }
+
+    &__progress-line,
+    &__range {
         position: absolute;
         height: 2px;
         bottom: -1px;
@@ -53,15 +115,16 @@
         outline: none;
     }
 
-    .slider__range {
+    &__range {
         width: calc(100% - 2rem);
+        background-color: $color-slider-range;
         -webkit-appearance: none;
 
         &::-webkit-slider-thumb {
             -webkit-appearance: none;
             width: 20px;
             height: 20px;
-            background-color: #FF9514;
+            background-color: $color-char;
             border-radius: 50%;
             cursor: pointer;
         }
@@ -70,7 +133,7 @@
             border: 0;
             width: 20px;
             height: 20px;
-            background-color: #FF9514;
+            background-color: $color-char;
             border-radius: 50%;
             cursor: pointer;
         }

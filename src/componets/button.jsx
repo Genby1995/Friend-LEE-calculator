@@ -6,9 +6,9 @@ function Button(props) {
 
     return (
         <button
-            disabled={status == "disabled"}
+            disabled={status == "loading"}
             className="button">
-            {status == "loading" 
+            {status == "waiting" 
             ? <span className="spinner"></span>
             : buttonText}
         </button>

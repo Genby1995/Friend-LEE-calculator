@@ -1,47 +1,66 @@
 import React, { useState } from "react";
 
 function Input(props) {
+    const step = props.step || 1;
+    const name = props.name
     const status = props.status;
-    const unit = props.unit;
+    const unit = props.unit || "";
     const min = props.min;
     const max = props.max;
     const value = props.value;
+    const displayBasis = props.basis || max;
     const changeHandler = props.changeHandler
     const progress = (value - min) / (max - min)
-    const secondInputValue = props.secondInputValue;
+    const displayValue = Math.round(value / displayBasis * 100);
 
-    const [mainValue, setMainValue] = useState(value)
+    const [mainValue, setMainValue] = useState(value.toLocaleString('ru-Ru'))
 
-    const handleChange = (e) => {
+    const handleSliderChange = (e) => {
         changeHandler(e.target.value);
-        setMainValue(e.target.value)
+        setMainValue(Number(e.target.value).toLocaleString('ru-Ru'))
     }
-    const heandleMainInputChange = (e) => {
-        setMainValue(e.target.value);
+    const heandleTextChange = (e) => {
+        const newValue = e.target.value.replace(/[^0-9]/g, "")
+        setMainValue(Number(newValue).toLocaleString('ru-Ru'));
     }
-    const heandleMainInputBlur = (e) => {
-        if (e.target.value > max) {
+    const heandleInputBlur = (e) => {
+        const newValue = e.target.value.replace(/[^0-9]/g, "")
+        if (newValue > max) {
             setMainValue(max);
-            changeHandler(max); 
+            changeHandler(max);
         }
-        else if (e.target.value < min) {
+        else if (newValue < min) {
             setMainValue(min);
-            changeHandler(min); 
+            changeHandler(min);
         }
-        else changeHandler(e.target.value);
-    } 
+        else changeHandler(Math.round(newValue));
+    }
 
     return (
-        <div className="slider">
+        <div className={status == "loading"
+            || status == "waiting"
+            ? "slider disabled"
+            : "slider"}>
             <input
-                className="slider__main-input"
+                disabled={status == "loading" || status == "waiting"}
+                className="slider__input"
                 value={mainValue}
-                onChange={heandleMainInputChange}
-                onBlur={heandleMainInputBlur}
+                onChange={heandleTextChange}
+                onBlur={heandleInputBlur}
                 type="text" />
-            <input className="slider__second-input" type="text" value={secondInputValue} />
-            <span className="slider__unit"> {unit} </span>
-            <input className="slider__range" value={value} onChange={handleChange} type="range" />
+            {name == "Первый взнос"
+                ? <span className="slider__display" >{displayValue + "%"}</span>
+                : <span className="slider__unit"> {unit} </span>
+            }
+            <input
+                disabled={status == "loading" || "waiting"}
+                className="slider__range"
+                step={step}
+                max={max}
+                min={min}
+                value={value}
+                onChange={handleSliderChange}
+                type="range" />
             <span className="slider__progress-line" style={{ width: `calc((100% - 2rem)*${progress})`, maxWidth: "100%" }} />
         </div>
     );
