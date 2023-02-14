@@ -63,7 +63,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            tittle: "Friend Lee",
+            // tittle: "Friend Lee",
             template: "./src/index.html",
             favicon: './public/favicon.ico',
             minify: {
