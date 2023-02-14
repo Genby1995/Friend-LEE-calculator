@@ -53,7 +53,7 @@ function Input(props) {
                 : <span className="slider__unit"> {unit} </span>
             }
             <input
-                disabled={status == "loading" || "waiting"}
+                disabled={status == "loading" || status == "waiting"}
                 className="slider__range"
                 step={step}
                 max={max}
