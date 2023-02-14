@@ -68,7 +68,7 @@ $color-input: #575757;
 
 .calcs-container {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 40px;
 
     .calc-wrapper {
