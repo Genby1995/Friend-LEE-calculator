@@ -4,9 +4,9 @@ https://friend-lee.onrender.com/ - hosting deployment.
 
 ## Installation and exploitation:
 
-<b> Development:</b> "npm run dev" or "npm run start (for hot refresh)"
+<b style="color: yellow"> Development:</b> <b>"npm run dev"</b> or <b>"npm run start"</b> (for hot refresh).
 <p>
-<b>Production:</b> "npm run build", then run index.html in "./dist"
+<b style="color: green">Production:</b> <b>"npm run build"</b>, then run index.html in <b>"./dist"</b>
 
 ## About
 
@@ -18,7 +18,7 @@ The assembly and launch of the application is implemented via Webpack with confi
 <p>
 With the "click" event on the button the input filelds become disabled and the timer is invoked, which returns ALERT with sringified JSON with input fields values. 
 
-## Ftack
+## Stack
 - React
 - SCSS
 - NPM
