@@ -5,6 +5,7 @@ https://friend-lee.onrender.com/ - hosting deployment.
 ## Installation and exploitation:
 
 Development: "npm run dev" or "npm run start (for hot refresh)"
+<br>
 Production: "npm run build", then run index.html in "./dist"
 
 ## About
