@@ -1,37 +1,21 @@
 # StorySurf 
 
-https://storysurf.website/ - деплой фронтэнда
+https://friend-lee.onrender.com/ - hosting deployment.
 
-Социальная сеть "StorySerf".
+## Installation and exploitation:
 
-Предназначена для агрегации постов. Позволяет пользователям:
-- регистрировать, авторизовать, удалять и изменять аккаунт соцсети;
-- создавать свои посты с текстом и изображениями;
-- удалять свои посты;
-- отсматривать посты соцсети в следующих разделах:
-    - свежее
-    - лучшее
-    - посты по моим подпискам
-- оценивать чужие посты;
-- добавлять посты в закладки;
-- фильтровать посты и пользователей с помощью строки поиска;
-- подписываться на пользователей с целью:
-    - получения списка постов от подписанных пользователей;
+Development: "npm run dev" or "npm run start (for hot refresh)"
+Production: "npm run build", then run index.html in "./dist"
 
-# FronEnd: стэк:
+## About
 
-- платформа приложения: React
-- менежер состояний: Redux Toolkit
-- менеджер пакетов: NPM
-- прочее: AXIOS, MUI/icons, compressorjs, 
+The application provides the functionality of a credit calculator.
+The design of the page adapts to the width of the screen and is compatible for the majority of platforms.
+The assembly and launch of the application is implemented via Webpack with config.
+With the "click" event on the button the input filelds become disabled and the timer is invoked, which returns ALERT with sringified JSON with input fields values. 
 
-# FronEnd: описание
-
-Данное приложение разработано для отображения пользовательского интерфейса. Данные для отображениия подгружаются с базы данных в MongoDB через API сервера на NodeJS и общения с базы данных.
-Авторизация пользователя происходит с помощью REFRESH_TOKEN и ACCESS_TOKEN. С помощью них же происходит подтверждение возможности пользователя изменять свои данные.
-
-# Дальнейшие улучшения:
-- добавление уведомлений о их новых постах;
-- добавление системы мессенджера;
-- добавление системы комментариев;
-
+## Ftack
+- React
+- SCSS
+- NPM
+- Webpack
