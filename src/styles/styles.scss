@@ -49,7 +49,7 @@ $color-input: #575757;
 .sliders-container {
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    gap: 30px;
 
     .slider-wrapper {
         flex: 1;
@@ -69,7 +69,8 @@ $color-input: #575757;
 .calcs-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 40px;
+    grid-template-rows: 1fr;
+    gap: 30px;
 
     .calc-wrapper {
         justify-content: center;
@@ -230,7 +231,7 @@ $color-input: #575757;
 
     .calcs-container {
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: auto auto;
         row-gap: 40px;
         column-gap: 20px;
@@ -253,7 +254,7 @@ $color-input: #575757;
 
     .calcs-container {
         display: grid;
-        grid-template-columns: auto ;
+        grid-template-columns: 1fr ;
         grid-template-rows: auto auto auto;
         gap: 40px;
 
