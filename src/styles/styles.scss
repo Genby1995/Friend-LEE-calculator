@@ -84,6 +84,7 @@ $color-input: #575757;
 .calc {
     font-size: var(--fs-calc);
     font-family: "Nekst";
+    white-space: nowrap;
 }
 
 .slider {
@@ -224,6 +225,7 @@ $color-input: #575757;
     .main-container {
         padding: 40px;
     }
+
     .sliders-container {
         flex-direction: column;
         gap: 40px;
@@ -254,7 +256,7 @@ $color-input: #575757;
 
     .calcs-container {
         display: grid;
-        grid-template-columns: 1fr ;
+        grid-template-columns: 1fr;
         grid-template-rows: auto auto auto;
         gap: 40px;
 
